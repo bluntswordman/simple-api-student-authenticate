@@ -63,22 +63,22 @@
 ```json 
   {
     "status" : 200,
-    "data" : {
-      [
+    "data" : [
+      {
         "id" : "integer",
         "firstname" : "string",
         "lastname" : "string",
         "npm" : "string",
         "email" : "string",
-      ],
-      [
+      },
+      {
         "id" : "integer",
         "firstname" : "string",
         "lastname" : "string",
         "npm" : "string",
         "email" : "string",
-      ]
-    }
+      }
+    ]
   }
 ```
 #### GET data student by ID ####
