@@ -40,7 +40,7 @@
     "status" : 200,
     "msg" : "Login Berhasil",
     "data" : {
-      "token" : "string"
+      "accesstoken" : "string"
     }
   }
 ```
