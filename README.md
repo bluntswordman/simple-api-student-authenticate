@@ -38,7 +38,10 @@
 ```json 
   {
     "status" : 200,
-    "msg" : "Login Berhasil"
+    "msg" : "Login Berhasil",
+    "data" : {
+      "token" : "string"
+    }
   }
 ```
 #### GET All data students ####
@@ -46,6 +49,16 @@
 - Endpoint  : `/v1/user`
 - Header :
     - Content-Type : application/json
+- auth : 
+```json
+  {
+    "type": "bearer",
+    "bearer": {
+        "key": "accesstoken",
+        "type": "string"
+    }
+  }
+```
 - Response :
 ```json 
   {
@@ -73,6 +86,16 @@
 - Endpoint  : `/v1/user/{id}`
 - Header :
     - Content-Type : application/json
+- auth : 
+```json
+  {
+    "type": "bearer",
+    "bearer": {
+        "key": "accesstoken",
+        "type": "string"
+    }
+  }
+```
 - Response :
 ```json 
   {
@@ -91,6 +114,16 @@
 - Endpoint  : `/v1/user/{id}`
 - Header :
     - Content-Type : application/json
+- auth : 
+```json
+  {
+    "type": "bearer",
+    "bearer": {
+        "key": "accesstoken",
+        "type": "string"
+    }
+  }
+```
 - Body :
 ```json 
   {
@@ -112,6 +145,16 @@
 - Endpoint  : `/v1/user/{id}`
 - Header :
     - Content-Type : application/json
+- auth : 
+```json
+  {
+    "type": "bearer",
+    "bearer": {
+        "key": "accesstoken",
+        "type": "string"
+    }
+  }
+```
 - Response :
 ```json 
   {

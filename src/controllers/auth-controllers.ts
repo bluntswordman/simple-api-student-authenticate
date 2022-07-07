@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
+import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 const { students } = require('../db/models');
+
+require('dotenv').config();
 
 class Authenticate {
   register = async (req: Request, res: Response): Promise<Response> => {
@@ -53,7 +56,14 @@ class Authenticate {
 
       if (!isMatch) return res.status(400).json({msg : "Password salah"});
 
-      return res.status(200).json({msg : "Login Berhasil"});
+      const token = sign({ id: user.id }, `${process.env.SECRET_KEY}`, { expiresIn: '1h' });
+
+      res.cookie('accessToken', token, { httpOnly: true });
+
+      return res.status(200).json({
+        msg : "Login Berhasil", 
+        token: token,
+      });
     } catch (error) {
       return res.status(500)
     }
