@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
+import { config as dotenv } from 'dotenv';
 
 import AuthenticatedRoute from './routers/AuthRoutes';
 import UsersRoute from './routers/UserRoutes';
@@ -15,6 +16,7 @@ class App {
     this.app = express();
     this.plugins();
     this.routes();
+    dotenv();
   }
 
   protected plugins(): void {

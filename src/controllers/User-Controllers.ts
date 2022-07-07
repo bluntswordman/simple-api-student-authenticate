@@ -1,20 +1,60 @@
 import { Response, Request } from 'express';
+const { students } = require('../db/models');
 
 class User {
-  getUser(req: Request, res: Response): Response {
-    return res.status(200).json({msg : "Get User Berhasil"});
+  getUser = async(req: Request, res: Response): Promise<Response> => {
+    try {
+      const user = await students.findAll({
+        attributes: ['id', 'firstname', 'lastname', 'npm', 'email']
+      });
+      if (!user) return res.status(400).json({msg : "Data tidak ditemukan"});
+      return res.status(200).json(user);
+    } catch (error) {
+      return res.status(500);
+    }
   }
 
-  getUserbyId(req: Request, res: Response): Response {
-    return res.status(200).json({msg : "Get User by Id Berhasil"});
+  getUserbyId = async(req: Request, res: Response): Promise<Response> => {
+    const { id } = req.params;
+
+    try {
+      const user = await students.findOne({
+        where: { id },
+        attributes: ['id', 'firstname', 'lastname', 'npm', 'email']
+      });
+      if (!user) return res.status(400).json({msg : "Data mahasiswa tidak ditemukan"});
+      return res.status(200).json(user);
+    } catch (error) {
+      return res.status(500);
+    }
   }
 
-  updateUser(req: Request, res: Response): Response {
-    return res.status(200).json({msg : "Update User Berhasil"});
+  updateUser = async(req: Request, res: Response): Promise<Response> => {
+    const { id } = req.params;
+    const { firstname, lastname, npm, email } = req.body;
+
+    try {
+      await students.update({
+        firstname: firstname || students.firstname, 
+        lastname: lastname || students.lastname,
+        npm: npm || students.npm,
+        email: email || students.email
+      }, { where: { id }});
+      return res.status(200).json({msg : "Update User Berhasil"});
+    } catch (error) {
+      return res.status(500);
+    }
   }
 
-  deleteUser(req: Request, res: Response): Response {
-    return res.status(200).json({msg : "Delete User Berhasil"});
+  deleteUser = async(req: Request, res: Response): Promise<Response> => {
+    const { id } = req.params;
+
+    try {
+      await students.destroy({ where: { id }});
+      return res.status(200).json({msg : "Data Mahasiswa Berhasil Dihapus"});
+    } catch (error) {
+      return res.status(500);
+    }
   }
 }
 
