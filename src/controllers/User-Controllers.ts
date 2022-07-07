@@ -1,23 +1,21 @@
-import {Request, Response} from 'express';
+import { Response, Request } from 'express';
 
-class UserControllers {
-  register(req: Request, res: Response): Response {
-    const { firstName, lastName, npm, email, password, confirmPassword } = req.body;
-
-    if ( !firstName || !lastName || !npm || !email || !password || !confirmPassword ) return res.status(400).json({msg : "Tolong isi semua from"});
-
-    if ( password !== confirmPassword ) return res.status(400).json({msg : "Password dan Konfirmasi Password tidak sama"});
-
-    return res.status(201).json({msg : "Berhasil Register"});
+class User {
+  getUser(req: Request, res: Response): Response {
+    return res.status(200).json({msg : "Get User Berhasil"});
   }
 
-  login(req: Request, res: Response): Response {
-    const { email, password } = req.body;
+  getUserbyId(req: Request, res: Response): Response {
+    return res.status(200).json({msg : "Get User by Id Berhasil"});
+  }
 
-    if ( !email || !password ) return res.status(400).json({msg : "Tolong isi semua from"});
+  updateUser(req: Request, res: Response): Response {
+    return res.status(200).json({msg : "Update User Berhasil"});
+  }
 
-    return res.status(200).json({msg : "Login Berhasil"});
+  deleteUser(req: Request, res: Response): Response {
+    return res.status(200).json({msg : "Delete User Berhasil"});
   }
 }
 
-export default new UserControllers();
+export default new User();

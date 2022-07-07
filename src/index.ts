@@ -5,7 +5,8 @@ import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 
-import UserRoutes from './routers/User-Router';
+import AuthenticatedRoute from './routers/AuthRoutes';
+import UsersRoute from './routers/UserRoutes';
 
 class App {
   public app: Application;
@@ -25,7 +26,8 @@ class App {
   }
 
   protected routes(): void {
-    this.app.use('/v1/user/', UserRoutes);
+    this.app.use('/v1/auth', AuthenticatedRoute);
+    this.app.use('/v1/user', UsersRoute);
   }
 }
 
